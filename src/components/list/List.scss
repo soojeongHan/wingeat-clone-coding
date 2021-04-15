@@ -1,0 +1,40 @@
+.list {
+  .list-subject {
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding: 2rem;
+    padding-bottom: 3rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .product-list {
+    padding: 0 4rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    
+    box-sizing: border-box;
+
+    .product {
+      margin: 1rem 0.5rem;
+      .product-image {
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 0.5rem;
+          cursor: pointer;
+        }
+      }
+      .product-name {
+        padding: 0.3rem 0;
+        font-size: 0.8rem;
+        font-weight: lighter;
+      }
+      .product-price {
+        font-size: 1rem;
+        font-weight: bold;
+      }
+    }
+  }
+}
