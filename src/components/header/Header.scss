@@ -1,15 +1,18 @@
+@import "../../style/mixin";
+
 .header {
   border-bottom: 0.5px solid #C0C0C0;
   
-  .header-top {
+  .header__top {
     padding: 0.5rem;
     background-color: #f5f5f5;
     display: flex;
+    order: 2;
     justify-content: flex-end;
     align-items: center;
 
-    .header-top-cart {
-      font-size: 0.6rem;
+    .header__top__cart {
+      font-size: 0.7rem;
       color: #424242;
       margin-right: 5%;
       display: flex;
@@ -17,7 +20,7 @@
       align-items: center;
       cursor: pointer;
 
-      .header-top-cart-count-product {
+      .header__top__cart__count-product {
         margin-right: 0.2rem;
         display: inherit;
         justify-content: inherit;
@@ -31,10 +34,10 @@
     }
   }
 
-  .header-main {
+  .header__main {
+    order: 1;
     padding: 2rem;
-    // padding-top: 0;
-    .header-main-logo {
+    .header__main__logo {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -45,6 +48,28 @@
 
         cursor: pointer;
         user-select: none;
+      }
+    }
+  }
+
+  @include mobile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+
+    .header__top {
+      display: flex;
+      width: 6rem;
+      height: 3rem;
+      background-color: #ffffff;
+
+      .header__top__cart {
+        font-size: 1rem;
+        .header__top__cart__count-product {
+          width: 1.2rem;
+          height: 1.2rem;
+        }
       }
     }
   }

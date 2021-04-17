@@ -1,37 +1,84 @@
+@import "../../style/mixin";
+
 .feature {
-  .feature-products {
-    width: 90%;
-    height: 90%;
-    margin: 0 auto;
+  .feature__products {
     position: static;
     
-    .feature-products-images {
-      display: flex;
-      overflow: hidden;
+    .feature__products__images-wrapper {
+      width: 80vw;
+      height: 50vh;
+      position: relative;
+      overflow-x: hidden;
+      margin: 0 auto;
+
+      @include mobile {
+        width: 100vw;
+        margin: 0;
+      }
       
-      img {
+      .feature__products__slider {
+        position: absolute;
+        right: 2%;
+        bottom: 5%;
+        
+        z-index: 1;
+        display: flex;
+        user-select: none;
+
+        .feature__products__slider__number {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-right: 10px;
+          width: 35px;
+          height: 25px;
+          font-size: 0.8rem;
+          color: #ffffff;
+          
+          background: #808080;
+          border-radius: 60%;
+        }
+        
+        .feature__products__slider__dot {
+          margin-right: 10px;
+          width: 7px;
+          height: 7px;
+          
+          background: #808080;
+          border-radius: 50%;
+          cursor: pointer;
+          &.active {
+            background: #000000;
+          }
+        }
+      }
+
+      .feature__products__images {
         width: 100%;
         height: 100%;
-        object-fit: fill;
-      }
-    }
-
-    .feature-products-slider {
-      position: absolute;
-      
-      right: 5%;
-      transform: translate(-10%, -300%);
-      display: flex;
-      user-select: none;
-      
-      .feature-products-slider-dot {
-        margin-right: 10px;
-        width: 7px;
-        height: 7px;
-        
-        background: #000000;
-        border-radius: 50%;
-        cursor: pointer;
+        position: static;
+        display: flex;
+        .feature__products__image {
+          transition: transform .5s, opacity .5s, z-index .5s;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          object-fit: fill;
+          opacity: 0;
+          &.active {
+            opacity: 1;
+          }
+          &.prev {
+            transform: translateX(-100%);
+          }
+          &.next {
+            transform: translateX(100%);
+          }
+        }
       }
     }
   }

@@ -1,36 +1,95 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Feature from '../components/feature/Feature';
+import { getFeature } from '../redux/modules/shopping';
+
+/* 
+  Feature 데이터를 서버로부터 가져온다.
+*/
+const FetchFeatureData = () => {
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(getFeature());
+  }, [dispatch]);
+
+  const feature = useSelector(state => state.shopping.feature);
+
+  return {
+    feature
+  };
+};
+
+/* 
+  Carousel 방식의 Slider 구현.
+  - autoPlay(true) && isMoving(true) 조건에 맞아, setTimeout 함수가 실행된다.
+    1) 3000ms 시간이 흐른 후, 현재 사진의 인덱스를 나타내는 변수의 상태를 +1 더해서 변화시킨다.
+      (변수의 상태를 변화시켰기 때문에, 3초후에 useEffect의 deps로 들어간 변수가 변화하여 다시 실행한다. 즉, 조건이 충족되는 한 3초마다 함수가 실행된다.)
+    2) 움직이는지 확인하는 변수(isMoving)의 상태를 false로 변화시킨다.
+      - 변화를 감지하고, useEffect에서 다시 true로 상태를 변화.
+      - 순서대로 넘어가고, setTimeout 함수가 연달아 호출되어 몇 개씩 넘어가버리지 않게 트리거 역할을 한다.
+*/
+const SliderFeature = () => {
+  // Slider AutoPlay 
+  const [autoPlay, setAutoPlay] = React.useState(true);
+  const [isMoving, setIsMoving] = React.useState(true);
+  const [currentFeatrue, setCurrentFeature] = React.useState(1);
+
+  React.useLayoutEffect(() => {
+    setIsMoving(() => true)
+  }, [isMoving]);
+
+  React.useLayoutEffect(() => {
+    let id;
+    if(autoPlay && isMoving) {
+      id = setTimeout(() => {
+        setCurrentFeature((prevIndex) => prevIndex + 1 > 5 ? 1 : prevIndex + 1);
+        setIsMoving(() => false);
+       }, 3000);
+    }
+    // 컴포넌트 언마운트 => setTimeout 함수 clear
+    return () => {
+      clearTimeout(id);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoPlay, currentFeatrue]);
+
+  // mobile 전환 시, 슬라이더에 dot에서 number로 전환.
+  // resize 이벤트에 소모되는 값을 줄이고자 setTimeout을 통해서 실행.
+  const [isMobile, setIsMobile] = React.useState(false);
+  React.useEffect(() => {
+    const handleResize = () => {
+      let timer;
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        setIsMobile(window.innerWidth < 700 ? true : false);
+      }, 100);
+    }
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    }
+  }, []);
+
+  // Dot을 클릭하면, 위치에 따른 이미지 표시
+  const clickMoveFeatureImage = React.useCallback((index) => {
+    setCurrentFeature(() => index);
+  }, []);
+
+  return {
+    currentFeatrue, isMobile,
+    clickMoveFeatureImage, setAutoPlay
+  }
+}
 
 const FeatureContainer = () => {
-  const tmpData = [
-    {
-      "image": "feature/images/dcabfb7e-e89a-4f83-a3d6-5927b971bf79-w1200.jpg",
-      "mobileImage": "feature/images/b2fc34e6-7686-4710-b78d-c9905ddd199d-w1080.jpg"
-    },
-    {
-      "image": "feature/images/b672865b-697f-4ea6-abe2-fef44632cec3-w1200.png",
-      "mobileImage": "feature/images/5c264a80-29f6-4b8c-9b06-1afc717d4727-w1080.png"
-    },
-    {
-      "image": "feature/images/fa658fc8-68bd-4f9a-aea2-12b17d784bd0-w1200.jpg",
-      "mobileImage": "feature/images/5963650e-4cc0-439b-8138-f75728d38f93-w1080.jpg"
-    },
-    {
-      "image": "feature/images/89e7fe73-af10-4960-be8e-6d110cbf7fb5-w1200.jpg",
-      "mobileImage": "feature/images/f296f863-830a-409b-96ae-401a0a002d93-w1080.jpg"
-    },
-    {
-      "image": "feature/images/ae575cf1-46a0-4b96-a8b5-4b0d2838e524-w1200.jpg",
-      "mobileImage": "feature/images/038afd38-1439-4f3e-9f16-5ff849d19303-w1080.jpg"
-    }
-  ];
-
-  const clickMoveFeatureImage = () => {
-    // TODO : Dot을 누르면, 해당 차례의 이미지로 변경된다.
-  }
+  const {feature} = FetchFeatureData();
+  const {currentFeatrue, clickMoveFeatureImage, isMobile} = SliderFeature();
 
   return (
-    <Feature data={tmpData} clickMoveFeatureImage={clickMoveFeatureImage}/>
+    <Feature 
+      data={feature || []} currentFeatrue={currentFeatrue} isMobile={isMobile}
+      clickMoveFeatureImage={clickMoveFeatureImage}/>
   );
 }
 
