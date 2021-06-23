@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/wingeat-clone-coding/static/css/main.838f1972.chunk.css",
-    "main.js": "/wingeat-clone-coding/static/js/main.4ea94b61.chunk.js",
-    "main.js.map": "/wingeat-clone-coding/static/js/main.4ea94b61.chunk.js.map",
+    "main.js": "/wingeat-clone-coding/static/js/main.1a0d0404.chunk.js",
+    "main.js.map": "/wingeat-clone-coding/static/js/main.1a0d0404.chunk.js.map",
     "runtime-main.js": "/wingeat-clone-coding/static/js/runtime-main.405cf865.js",
     "runtime-main.js.map": "/wingeat-clone-coding/static/js/runtime-main.405cf865.js.map",
-    "static/js/2.4a4da578.chunk.js": "/wingeat-clone-coding/static/js/2.4a4da578.chunk.js",
-    "static/js/2.4a4da578.chunk.js.map": "/wingeat-clone-coding/static/js/2.4a4da578.chunk.js.map",
+    "static/js/2.2b6297c7.chunk.js": "/wingeat-clone-coding/static/js/2.2b6297c7.chunk.js",
+    "static/js/2.2b6297c7.chunk.js.map": "/wingeat-clone-coding/static/js/2.2b6297c7.chunk.js.map",
     "static/js/3.17eff2e1.chunk.js": "/wingeat-clone-coding/static/js/3.17eff2e1.chunk.js",
     "static/js/3.17eff2e1.chunk.js.map": "/wingeat-clone-coding/static/js/3.17eff2e1.chunk.js.map",
     "index.html": "/wingeat-clone-coding/index.html",
     "static/css/main.838f1972.chunk.css.map": "/wingeat-clone-coding/static/css/main.838f1972.chunk.css.map",
-    "static/js/2.4a4da578.chunk.js.LICENSE.txt": "/wingeat-clone-coding/static/js/2.4a4da578.chunk.js.LICENSE.txt"
+    "static/js/2.2b6297c7.chunk.js.LICENSE.txt": "/wingeat-clone-coding/static/js/2.2b6297c7.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.405cf865.js",
-    "static/js/2.4a4da578.chunk.js",
+    "static/js/2.2b6297c7.chunk.js",
     "static/css/main.838f1972.chunk.css",
-    "static/js/main.4ea94b61.chunk.js"
+    "static/js/main.1a0d0404.chunk.js"
   ]
 }
